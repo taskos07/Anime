@@ -1,4 +1,6 @@
 using System;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace DefaultNamespace;
 
@@ -10,13 +12,16 @@ public abstract class Anime : IComparable<Anime>, IEquatable<Anime>
     public float Valutazione {get; protected set;}
     public int AnnoUscita {get; protected set;}
 
+    public Bitmap Copertina() => new(AssetLoader.Open(new Uri(AssetLoader.Exists(new Uri($"avares://Anime/Assets/{Id}.png")) ? $"avares://Anime/Assets/{Id}.png" : "avares://Anime/Assets/Icon.png")));
+
     protected Anime(string id, string titolo, float valutazione, int annoUscita)
     {
         Id = id;
         Titolo = titolo;
         Valutazione = valutazione;
         AnnoUscita = annoUscita;
-    }	
+    }
+    
     public int CompareTo(Anime? other)
     {
         if (other is null) return 1;
