@@ -9,5 +9,5 @@ public class FiltraAnno
         this.annoMinimo = annoMinimo;
     }
     public bool FiltraAnnoMinimo (Anime a) 
-    => a.Anno >= this.annoMinimo;
+    => a.AnnoUscita >= this.annoMinimo;
 }

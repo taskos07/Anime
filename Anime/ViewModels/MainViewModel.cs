@@ -6,13 +6,13 @@ namespace Anime.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    public ObservableCollection<global::Anime> Catalog { get; }
+    public ObservableCollection<DefaultNamespace.Anime> Catalog { get; }
 
     [ObservableProperty]
-    private global::Anime? selectedAnime;
+    private DefaultNamespace.Anime? selectedAnime;
 
     public MainViewModel()
     {
-        Catalog = new ObservableCollection<global::Anime>(CatalogManager.Istanza.AnimeDisponibili);
+        Catalog = new ObservableCollection<DefaultNamespace.Anime>(CatalogManager.Istanza.AnimeDisponibili);
     }
 }

@@ -1,36 +1,33 @@
-﻿static bool SoloCapolavori(Anime a) => a.Valutazione >= 8.5;
+using System;
 
-static void Main()
+namespace DefaultNamespace;
+
+internal static class CoreSample
 {
-    CatalogManager.Singleton.Catalogo = new List<Anime>
+    private static bool SoloCapolavori(Anime anime) => anime.Valutazione >= 8.5f;
+
+    public static void Run()
     {
-        new Anime("Goldrake", 1975, 8.2),
-        new Anime("Attack on Titan", 2013, 9.1),
-        new Anime("Demon Slayer", 2019, 8.7)
-    };
-    Console.WriteLine("Capolavori");
-    foreach (var a in CatalogManager.Singleton.Filtra(SoloCapolavori))
-        Console.WriteLine(a.Titolo);
+        AnimeMovie.FactoryMovie("goldrake", "Goldrake", 8.2f, 1975, 120);
+        AnimeSeries.FactorySeries("attack-on-titan", "Attack on Titan", 9.1f, 2013, 4);
+        AnimeMovie.FactoryMovie("demon-slayer", "Demon Slayer", 8.7f, 2019, 120);
 
-    FiltroAnno f = new FiltroAnno(2010);
-    Console.WriteLine("Dal 2010");
-    foreach (var a in CatalogManager.Singleton.Filtra(f.FiltraPerAnno))
-        Console.WriteLine(a.Titolo);
+        Console.WriteLine("Capolavori");
+        foreach (var anime in CatalogManager.Istanza.Filtra(SoloCapolavori))
+            Console.WriteLine(anime.Titolo);
 
-    Console.WriteLine("Notifiche");
-    ServizioUtente marco = new ServizioUtente("Marco");
-    ServizioUtente sara = new ServizioUtente("Sara");
+        var filtroAnno = new FiltraAnno(2010);
+        Console.WriteLine("Dal 2010");
+        foreach (var anime in CatalogManager.Istanza.Filtra(filtroAnno.FiltraAnnoMinimo))
+            Console.WriteLine(anime.Titolo);
 
-    NotificaStreaming canaleNotifiche = marco.RiceviNotifica;
-    canaleNotifiche += sara.RiceviNotifica;
-    canaleNotifiche("Nuovo episodio di Goldrake disponibile!");
+        var marco = new ServizioUtente("Marco");
+        var sara = new ServizioUtente("Sara");
 
-    Console.WriteLine("Senza Marco");
-    canaleNotifiche -= marco.RiceviNotifica;
-    canaleNotifiche?.Invoke("Nuovo episodio di Goldrake disponibile!");
-    
-    static void OnNuovoEpisodio(NuovoEpisodioEventArgs e)
-    {
-       string titolo_serie  
+        NotificaStreaming? notifiche = marco.RiceviNotifica;
+        notifiche += sara.RiceviNotifica;
+        notifiche?.Invoke("Nuovo episodio di Goldrake disponibile!");
+        notifiche -= marco.RiceviNotifica;
+        notifiche?.Invoke("Nuovo episodio di Goldrake disponibile!");
     }
 }

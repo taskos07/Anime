@@ -5,9 +5,9 @@ namespace DefaultNamespace;
 
 public class CatalogManager
 {
-    private static CatalogManager _istanza;
+    private static CatalogManager? _istanza;
     public List<Anime> AnimeDisponibili = new List<Anime>();
-    public NotificaStreaming CanaleNotifiche;
+    public NotificaStreaming? CanaleNotifiche;
 
     private CatalogManager()
     {
@@ -17,9 +17,7 @@ public class CatalogManager
     {
         get
         {
-            if (_istanza == null)
-                _istanza = new CatalogManager();
-            return _istanza;
+            return _istanza ??= new CatalogManager();
         }
     }
 

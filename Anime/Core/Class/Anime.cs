@@ -1,5 +1,7 @@
 using System;
 
+namespace DefaultNamespace;
+
 public delegate bool FiltroAnime(Anime a);
 public abstract class Anime : IComparable<Anime>, IEquatable<Anime>
 {

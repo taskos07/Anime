@@ -1,3 +1,5 @@
+namespace DefaultNamespace;
+
 public class Episode
 {
     public int NumStagione {get; protected set;}

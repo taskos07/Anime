@@ -1,4 +1,6 @@
-﻿namespace DefaultNamespace;
+﻿using System;
+
+namespace DefaultNamespace;
 
 public delegate void NuovoEpisodioEventHandler(object sender, NuovoEpisodioEventArgs e);
 
