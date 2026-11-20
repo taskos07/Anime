@@ -1,16 +1,18 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using DefaultNamespace;
 
 namespace Anime.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    [ObservableProperty] public partial string Greeting { get; set; } = "Welcome to Avalonia!";
-    public ObservableCollection<Anime> Catalogo {get; set;}
-    public Anime AnimeSelezionato { get; set; }
+    public ObservableCollection<global::Anime> Catalog { get; }
+
+    [ObservableProperty]
+    private global::Anime? selectedAnime;
 
     public MainViewModel()
     {
-        Catalogo = new ObservableCollection<Anime>()
+        Catalog = new ObservableCollection<global::Anime>(CatalogManager.Istanza.AnimeDisponibili);
     }
 }

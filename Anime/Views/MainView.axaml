@@ -12,7 +12,15 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
+    <StackPanel Margin="16" Spacing="12">
+        <ListBox ItemsSource="{Binding Catalog}"
+                 SelectedItem="{Binding SelectedAnime}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Titolo}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock Text="{Binding SelectedAnime.Titolo}" />
+    </StackPanel>
 </UserControl>
